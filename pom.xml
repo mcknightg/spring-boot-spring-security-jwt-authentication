@@ -9,14 +9,15 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bezkoder</groupId>
-	<artifactId>spring-boot-security-jwt</artifactId>
+	<groupId>com.boilermaker</groupId>
+	<artifactId>boilerplate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-security-jwt</name>
-	<description>Demo project for Spring Boot Security - JWT</description>
+	<name>boilerplate</name>
+	<description>Boilermaker Boilerplate</description>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>com.boilermaker.boilerplate.SpringBootSecurityJwtApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -33,6 +34,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

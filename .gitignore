@@ -29,3 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+###CLIENT CODE ###
+/client/dist/
+/server/src/main/**
