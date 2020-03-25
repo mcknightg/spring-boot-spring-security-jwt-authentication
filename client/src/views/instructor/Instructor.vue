@@ -66,6 +66,7 @@
     </div>
 </template>
 <script>
+    import InstructorService from '../../services/instructor.service';
     export default {
         name:'InstructorList',
         data(){
@@ -76,24 +77,18 @@
             }
         },
         created(){
+
             this.fetchInstructors();
         },
         methods:{
             fetchInstructors:function(){
-                const baseURI = 'http://localhost:8083/instructor';
-                this.$http.get(baseURI)
-                    .then((result) => {
-                        this.instructors = result.data.content
-                    })
+                InstructorService.fetchInstructors()
+                .then((result) => {
+                    this.instructors = result.content
+                });
             },
             deleteInstructor(instructor){
-                const baseURI = 'http://localhost:8083/instructor/' + instructor.id;
-                this.$http.delete(baseURI)
-                    .then((result) => {
-                        if(result){
-                            this.fetchInstructors();
-                        }
-                    })
+               InstructorService.deleteInstructor(instructor.id);
             },
             showModal(instructor) {
                 this.instructor = instructor;
@@ -106,15 +101,12 @@
                 this.$emit('close');
             },
             saveInstructor: function (instructor) {
-                const baseURI = 'http://localhost:8083/instructor';
-                this.$http.post(baseURI,instructor)
-                    .then((result) => {
-                        if(result){
-                            this.close();
-                            this.isModalVisible = false;
-                            this.fetchInstructors();
-                        }
-                    })
+                let that = this;
+                InstructorService.saveInstructor(instructor,function(json){
+                        that.close();
+                        that.isModalVisible = false;
+                        that.fetchInstructors();
+                });
             }
         }
 

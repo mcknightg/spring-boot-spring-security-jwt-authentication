@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>com.boilermaker.boilerplate.SpringBootSecurityJwtApplication</start-class>
+		<start-class>com.boilermaker.boilerplate.BoilerplateApp</start-class>
 	</properties>
 
 	<dependencies>

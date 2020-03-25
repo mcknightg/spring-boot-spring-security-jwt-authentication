@@ -49,6 +49,7 @@
     </div>
 </template>
 <script>
+    import StudentTypeService from '../../services/studenttype.service';
     export default {
         name:'StudenttypeList',
         data(){
@@ -62,16 +63,15 @@
             this.fetchStudenttypes();
         },
         methods:{
+
             fetchStudenttypes:function(){
-                const baseURI = 'http://localhost:8083/studenttype';
-                this.$http.get(baseURI)
+                StudentTypeService.fetchStudenttypes()
                     .then((result) => {
-                        this.studenttypes = result.data.content
+                        this.studenttypes = result.content
                     })
             },
             deleteStudenttype:function(studenttype){
-                const baseURI = 'http://localhost:8083/studenttype/' + studenttype.id;
-                this.$http.delete(baseURI)
+                StudentTypeService.deleteStudenttype(studenttype.id)
                     .then((result) => {
                         if(result){
                             this.fetchStudenttypes();
@@ -86,8 +86,7 @@
                 this.$emit('close');
             },
             saveStudenttype: function (studenttype) {
-                const baseURI = 'http://localhost:8083/studenttype';
-                this.$http.post(baseURI,studenttype)
+                StudentTypeService.saveStudenttype(studenttype)
                     .then((result) => {
                         if(result){
                             this.fetchStudenttypes();

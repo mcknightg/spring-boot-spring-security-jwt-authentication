@@ -26,10 +26,7 @@ body {
 #sidebar-wrapper .list-group {
     width: 15rem;
 }
-.list-item{
-    margin-left:15px;
-    line-height: 3rem;
-}
+
 #page-content-wrapper {
     min-width: 100vw;
 }

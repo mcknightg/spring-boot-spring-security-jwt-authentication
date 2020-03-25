@@ -10,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @RestController
+@RequestMapping("/api/auth")
 public class StudentTypeController {
     @Autowired
     private StudentTypeRepository studenttypeRepository;
@@ -33,6 +35,12 @@ public class StudentTypeController {
     @CrossOrigin
     @PostMapping("/studenttype")
     public StudentType createStudentType(@Valid @RequestBody StudentType type) {
+        if(type.getCreatedAt() == null){
+            type.setCreatedAt(new Date());
+        }
+        if(type.getUpdatedAt() == null){
+            type.setUpdatedAt(new Date());
+        }
         StudentType studenttype = studenttypeRepository.save(type);
         return studenttype;
     }

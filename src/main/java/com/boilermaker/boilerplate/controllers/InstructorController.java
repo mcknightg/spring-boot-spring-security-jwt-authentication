@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/auth")
 public class InstructorController {
 
     @Autowired
@@ -35,6 +37,12 @@ public class InstructorController {
     @CrossOrigin
     @PostMapping("/instructor")
     public Instructor createInstructor(@Valid @RequestBody Instructor instructor) {
+        if(instructor.getCreatedAt() == null){
+            instructor.setCreatedAt(new Date());
+        }
+        if(instructor.getUpdatedAt() == null){
+            instructor.setUpdatedAt(new Date());
+        }
         Instructor instructors = instructorRepository.save(instructor);
         return instructors;
     }

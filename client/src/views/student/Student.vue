@@ -65,6 +65,7 @@
     </div>
 </template>
 <script>
+    import StudentService from '../../services/student.service';
     export default {
         name:'StudentList',
         data(){
@@ -79,18 +80,18 @@
         },
         methods:{
             fetchStudents:function(){
-                const baseURI = 'http://localhost:8083/student';
-                this.$http.get(baseURI)
+                let that = this;
+                StudentService.fetchStudents()
                     .then((result) => {
-                        this.students = result.data.content
-                    })
+                        that.students = result.content
+                    });
             },
             deleteStudent:function(student){
-                const baseURI = 'http://localhost:8083/student/' + student.id;
-                this.$http.delete(baseURI)
+                let that = this;
+                StudentService.deleteStudent(student.id)
                     .then((result) => {
                         if(result){
-                            this.fetchStudents();
+                            that.fetchStudents();
                         }
                     })
             },
@@ -102,14 +103,11 @@
                 this.$emit('close');
             },
             saveStudent: function (student) {
-                const baseURI = 'http://localhost:8083/student';
-                this.$http.post(baseURI,student)
+                let that = this;
+                StudentService.saveStudent(student)
                     .then((result) => {
-                        if(result){
-                            this.fetchStudents();
-                            this.closeModal();
-                        }
-                    })
+                        that.closeModal();
+                    });
             },
             closeModal() {
                 this.close();
